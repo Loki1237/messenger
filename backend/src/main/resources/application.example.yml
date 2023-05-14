@@ -1,0 +1,14 @@
+server:
+  port: 3001
+
+spring:
+  datasource:
+    driver-class-name: 'org.postgresql.Driver'
+    url: 'db-url'
+    username: 'db-username'
+    password: 'db-password'
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
