@@ -4,6 +4,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -18,6 +20,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 import ru.messenger.model.ChatType;
@@ -37,13 +41,14 @@ public class Chat {
     private long id;
 
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private ChatType type;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "creation_time")
-    private String creationTime;
+    @Column(name = "timestamp")
+    private Date timestamp;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "creator_id")

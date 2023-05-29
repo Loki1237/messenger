@@ -27,14 +27,14 @@ public class User {
     @Column(name = "id", unique = true)
     private long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "firstname")
+    private String firstname;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "lastname")
+    private String lastname;
 
-    @Column(name = "login")
-    private String login;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "email")
     private String email;

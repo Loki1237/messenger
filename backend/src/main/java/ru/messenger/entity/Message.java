@@ -4,6 +4,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Column;
@@ -16,6 +18,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import ru.messenger.model.MessageStatus;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -38,10 +42,11 @@ public class Message {
     @Column(name = "body")
     private String body;
 
-    @Column(name = "creation_time")
-    private String creationTime;
+    @Column(name = "timestamp")
+    private Date timestamp;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private MessageStatus status;
 
 }

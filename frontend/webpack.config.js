@@ -10,12 +10,20 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', '.ts', '.tsx'],
+        alias: {
+            app: path.resolve(__dirname, 'src/app/')
+        }
     },
     devServer: {
+        host: '0.0.0.0',
+        allowedHosts: 'all',
         port: 3000,
         historyApiFallback: true,
         proxy: {
-            '/': 'http://localhost:3001'
+            '/api': {
+                target: 'http://localhost:3001',
+                pathRewrite: { '^/api': '' },
+            }
         }
     },
     module: {
@@ -49,7 +57,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './public/index.html'
         })
     ]
 };

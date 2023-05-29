@@ -1,8 +1,15 @@
 package ru.messenger.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum ChatType {
-    CHANNEL,
-    DIALOG,
-    GROUP,
-    SELF
+    CHANNEL("CHANNEL"),
+    DIALOG("DIALOG"),
+    GROUP("GROUP"),
+    SELF("SELF");
+
+    private final String value;
 }
