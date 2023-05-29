@@ -13,12 +13,14 @@ export const App = () => {
 
     return (
         <div className={styles.App}>
-            <div className={styles.App_bar} />
+            <div className={styles.App_header} />
 
-            <Routes>
-                <Route path="/login" element={<Authentication />} />
-                <Route path="/signup" element={<Registration />} />
-            </Routes>
+            <div className={styles.App_content}>
+                <Routes>
+                    <Route path="/login" element={<Authentication />} />
+                    <Route path="/signup" element={<Registration />} />
+                </Routes>
+            </div>
         </div>
     );
 }
