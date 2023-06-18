@@ -1,25 +1,21 @@
-.Authentication {
-    width: 420px;
-    box-sizing: border-box;
-    padding-top: 40px;
+@import '~app/App.less';
+
+.FormFields {
+    animation: show 0.2s 1 linear;
 }
 
 .actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 12px;
 
     .backlink {
         text-align: right;
     }
 }
 
-@media (max-width: 600px) {
-    .Authentication {
-        width: 100%;
-        padding: 0 20px;
-    }
-
+@media (max-width: @narrow-screen-max-width) {
     .actions {
         flex-direction: column;
         align-items: stretch;
@@ -27,3 +23,13 @@
         margin-top: 24px;
     }
 }
+
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+

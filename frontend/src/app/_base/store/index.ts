@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers, AnyAction } from 'redux';
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { userReducer } from 'app/user/reducers/userReducer';
+import { accountReducer } from 'app/Account/reducers/accountReducer';
 
 const rootReducer = combineReducers({
-    user: userReducer
+    account: accountReducer
 });
 
 export const store = configureStore({

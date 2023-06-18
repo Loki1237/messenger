@@ -1,0 +1,20 @@
+@import '~app/App.less';
+
+.Main { // TODO: adaptation width
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    width: 1600px;
+    background-color: #fff;
+    box-shadow: 0 0 12px -4px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+@media (max-width: @narrow-screen-max-width) {
+    .Main {
+        width: 100%;
+        margin-bottom: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}

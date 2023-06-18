@@ -1,0 +1,26 @@
+@import '~app/App.less';
+
+.LeftHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 54px;
+    padding: 0 8px;
+    background-color: @primary-color;
+    box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+}
+
+.search {
+    background: darken(hsl(@primary-color), 8%);
+    color: #fff;
+
+    input:not(:hover):not(:focus-within) {
+        color: #fff;
+    }
+
+    &:hover,
+    &:focus-within {
+        background-color: #fff;
+        color: #000;
+    }
+}

@@ -3,7 +3,7 @@ import { User } from 'app/_base/models/user';
 
 const ACTION_PREFIX = 'USER_DATA';
 
-export const userActions = {
+export const chatListActions = {
     fetchRequest: createAction(`${ACTION_PREFIX}_FETCH_REQUEST`),
     fetchSuccess: createAction<User>(`${ACTION_PREFIX}_FETCH_SUCCESS`),
     fetchFailure: createAction<string>(`${ACTION_PREFIX}_FETCH_FAILURE`),

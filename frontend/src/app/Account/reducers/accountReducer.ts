@@ -1,40 +1,40 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { User } from 'app/_base/models/user';
-import { userActions } from '../actions/userActions';
+import { accountActions } from '../actions/accountActions';
 
-export interface UserState {
+interface AccountState {
     isLoading: boolean;
     error: string;
     data: User;
 }
 
-const initialState: UserState = {
+const initialState: AccountState = {
     isLoading: false,
     error: null,
     data: null
 };
 
-export const userReducer = createReducer(initialState, (builder) =>
+export const accountReducer = createReducer(initialState, (builder) =>
     builder
-        .addCase(userActions.fetchRequest, (state) => ({
+        .addCase(accountActions.fetchBegin, (state) => ({
             ...state,
             isLoading: true,
             error: null
         }))
-        .addCase(userActions.fetchSuccess, (state, action) => ({
+        .addCase(accountActions.fetchSuccess, (state, action) => ({
             ...state,
             isLoading: false,
             data: action.payload
         }))
-        .addCase(userActions.fetchFailure, (state, action) => ({
+        .addCase(accountActions.fetchFailure, (state, action) => ({
             ...state,
             isLoading: false,
             error: action.payload
         }))
-        .addCase(userActions.resetError, (state) => ({
+        .addCase(accountActions.resetError, (state) => ({
             ...state,
             error: null
         }))
-        .addCase(userActions.clearForm, () => initialState)
+        .addCase(accountActions.clearForm, () => initialState)
         .addDefaultCase((state) => state)
 );

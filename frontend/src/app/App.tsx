@@ -1,26 +1,25 @@
 import { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Authentication } from './user/containers/Authentication';
-import { Registration } from './user/containers/Registration';
+import { Route, Routes } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
+import { Account } from './Account';
+import { Main } from './Main';
+import { stomp } from './_base/websocket';
 import styles from './App.less';
 
 export const App = () => {
-    const navigate = useNavigate();
 
     useEffect(() => {
-        navigate('/login'); // TODO
+        stomp.activate();
     }, []);
 
     return (
-        <div className={styles.App}>
-            <div className={styles.App_header} />
-
-            <div className={styles.App_content}>
+        <ConfigProvider theme={{ token: { colorPrimary: '#1983f1' } }}>
+            <div className={styles.App}>
                 <Routes>
-                    <Route path="/login" element={<Authentication />} />
-                    <Route path="/signup" element={<Registration />} />
+                    <Route path="/account/*" element={<Account />} />
+                    <Route path="/" element={<Main />} />
                 </Routes>
             </div>
-        </div>
+        </ConfigProvider>
     );
 }
