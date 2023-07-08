@@ -1,5 +1,5 @@
 import React from 'react';
-import { RightHeader } from './components/RightHeader';
+import { Header } from './components/Header';
 import { Message } from './components/Message';
 import styles from './styles.less';
 
@@ -19,7 +19,7 @@ const currentUser = { id: 4 }
 
 export const RightColumn: React.FC = () => (
     <div className={styles.RightColumn}>
-        <RightHeader />
+        <Header />
         <div className={styles.message_list}>
             {messages.map((item, index, list) => (
                 <Message

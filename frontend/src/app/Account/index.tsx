@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Route, Routes, Navigate, useParams } from 'react-router-dom';
 import { Alert, Form, Typography } from 'antd';
 import { useAppSelector, useAppDispatch, shallowEqual } from 'app/_base/hooks';
-import { getScreenType } from 'app/_base/utils/screenUtils';
+import { getScreenType } from 'app/_base/utils';
 import { AccountFields } from './models/accountModels';
 import { LoginFields } from './components/LoginFields';
 import { SignupFields } from './components/SignupFields';

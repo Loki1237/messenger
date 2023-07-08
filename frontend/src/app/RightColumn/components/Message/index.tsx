@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import { Typography } from 'antd';
-import styles from './Message.less';
+import styles from './styles.less';
 
 const { Text } = Typography;
 

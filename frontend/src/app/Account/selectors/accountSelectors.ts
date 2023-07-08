@@ -1,6 +1,6 @@
 import { AppState } from 'app/_base/store';
 
-export const isLoadingSelector = (state: AppState) => state.account.isLoading;
+export const loadStatusSelector = (state: AppState) => state.account.loadStatus;
 
 export const errorSelector = (state: AppState) => state.account.error;
 

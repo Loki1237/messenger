@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers, AnyAction } from 'redux';
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { accountReducer } from 'app/Account/reducers/accountReducer';
+import { accountReducer } from 'app/Account/reducers/accountReducer'
+import { contactReducer } from 'app/LeftColumn/reducers/contactReducer';
 
 const rootReducer = combineReducers({
-    account: accountReducer
+    account: accountReducer,
+    contacts: contactReducer,
 });
 
 export const store = configureStore({

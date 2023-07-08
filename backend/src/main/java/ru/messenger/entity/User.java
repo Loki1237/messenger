@@ -3,6 +3,10 @@ package ru.messenger.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.FetchType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,6 +16,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -42,5 +49,11 @@ public class User {
     @JsonIgnore
     @Column(name = "password")
     private String password;
+
+    @Builder.Default
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinTable(name = "user_contact", inverseJoinColumns = @JoinColumn(name = "contact_id"))
+    private List<User> contacts = new ArrayList<>();
 
 }

@@ -2,17 +2,14 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    //border-right: solid 1px #aaa;
+    border-right: solid 1px #ccc;
+}
 
-    &_item {
-        cursor: pointer;
+.content {
+    flex-grow: 1;
+    overflow: hidden;
+}
 
-        &:hover {
-            background-color: #eee;
-        }
-
-        &_meta {
-            padding: 0 16px;
-        }
-    }
+.footer {
+    flex-shrink: 0;
 }

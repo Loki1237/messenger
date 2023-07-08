@@ -1,15 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { User } from 'app/_base/models/user';
+import { LoadStatus, User } from 'app/_base/models';
 import { accountActions } from '../actions/accountActions';
 
 interface AccountState {
-    isLoading: boolean;
+    loadStatus: LoadStatus;
     error: string;
     data: User;
 }
 
 const initialState: AccountState = {
-    isLoading: false,
+    loadStatus: 'IDLE',
     error: null,
     data: null
 };
@@ -18,17 +18,17 @@ export const accountReducer = createReducer(initialState, (builder) =>
     builder
         .addCase(accountActions.fetchBegin, (state) => ({
             ...state,
-            isLoading: true,
+            loadStatus: 'IN_PROGRESS',
             error: null
         }))
         .addCase(accountActions.fetchSuccess, (state, action) => ({
             ...state,
-            isLoading: false,
+            loadStatus: "SUCCESS",
             data: action.payload
         }))
         .addCase(accountActions.fetchFailure, (state, action) => ({
             ...state,
-            isLoading: false,
+            loadStatus: 'FAILURE',
             error: action.payload
         }))
         .addCase(accountActions.resetError, (state) => ({

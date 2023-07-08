@@ -50,12 +50,12 @@ public class Chat {
     @Column(name = "timestamp")
     private Date timestamp;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "creator_id")
     private User creator;
 
     @Builder.Default
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = User.class)
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinTable(
             name = "chat_member",
             joinColumns = @JoinColumn(name = "chat_id"),
@@ -63,7 +63,7 @@ public class Chat {
     private List<User> members = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Message.class, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = Message.class, orphanRemoval = true)
     @JoinColumn(name = "chat_id")
     private List<Message> messages = new ArrayList<>();
 

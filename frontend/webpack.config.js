@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const cookie = 'auth=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ2YW55b2swMDEifQ.HlAr4Rdj0fCYxfvUscGkxkNOrvV7jtwZwRQFxIf0zSeEN1HUcEMld5wZLlMpy1irZe4Ts42cRc6rBza8OKu9BQ; Path=/user; Expires=Thu, 29 Jun 2023 16:38:01 GMT;';
+const cookie = 'auth=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJib2JieV9kIn0.WoK86p_ELvCEGa9ucW1Kc9mMJR6LSbbNavuKO99ObuD4z3nvQf_SRN4R25w9X_M01LWTvXPkmKgX1VVF-OJqUA; Path=/user; Expires=Fri, 21 Jul 2023 15:37:24 GMT;';
 
 module.exports = {
     entry: './src/index.tsx',

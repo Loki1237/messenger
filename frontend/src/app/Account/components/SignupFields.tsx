@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Form, Input, ColProps } from 'antd';
 import { useAppSelector, shallowEqual } from 'app/_base/hooks';
-import { isLoadingSelector } from '../selectors/accountSelectors';
+import { loadStatusSelector } from '../selectors/accountSelectors';
 import { AccountFormField } from '../models/accountModels';
 import styles from './styles.less';
 
@@ -43,7 +43,7 @@ interface Props {
 }
 
 export const SignupFields: React.FC<Props> = ({ onClearForm, wrapperCol }) => {
-    const isLoading = useAppSelector(isLoadingSelector, shallowEqual);
+    const loadStatus = useAppSelector(loadStatusSelector, shallowEqual);
 
     return (
         <div className={styles.FormFields}>
@@ -55,7 +55,7 @@ export const SignupFields: React.FC<Props> = ({ onClearForm, wrapperCol }) => {
 
             <Form.Item wrapperCol={wrapperCol}>
                 <div className={styles.actions}>
-                    <Button type="primary" htmlType="submit" loading={isLoading}>
+                    <Button type="primary" htmlType="submit" loading={loadStatus === 'IN_PROGRESS'}>
                         Create account
                     </Button>
 

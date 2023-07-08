@@ -1,11 +1,11 @@
 import { createAction } from '@reduxjs/toolkit';
-import { User } from 'app/_base/models';
+import { SearchResult, User } from 'app/_base/models';
 
-const ACTION_PREFIX = 'ACCOUNT';
+const ACTION_PREFIX = 'CONTACTS';
 
-export const accountActions = {
+export const contactActions = {
     fetchBegin: createAction(`${ACTION_PREFIX}_FETCH_BEGIN`),
-    fetchSuccess: createAction<User>(`${ACTION_PREFIX}_FETCH_SUCCESS`),
+    fetchSuccess: createAction<SearchResult<User>>(`${ACTION_PREFIX}_FETCH_SUCCESS`),
     fetchFailure: createAction<string>(`${ACTION_PREFIX}_FETCH_FAILURE`),
     clearForm: createAction(`${ACTION_PREFIX}_CLEAR_FORM`),
     resetError: createAction(`${ACTION_PREFIX}_RESET_ERROR`)

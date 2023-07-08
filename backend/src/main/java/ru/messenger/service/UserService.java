@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
+import java.util.List;
+
 import ru.messenger.exception.SignupException;
 import ru.messenger.repository.UserRepository;
+import ru.messenger.model.SearchResult;
 import ru.messenger.entity.User;
 
 @Service
@@ -14,8 +17,19 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
+    public User findById(long id) {
+        return repository.findById(id);
+    }
+
     public User findByUsername(String username) {
         return repository.findByUsername(username);
+    }
+
+    public SearchResult<User> findContacts(long userId, int offset) {
+        List<User> contacts = repository.findContacts(userId, offset);
+        long count = repository.getContactCount(userId);
+
+        return SearchResult.<User>builder().list(contacts).total(count).build();
     }
 
     public User create(User user) throws SignupException {

@@ -1,9 +1,11 @@
 package ru.messenger.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import ru.messenger.authentication.JwtProvider;
 import ru.messenger.authentication.AuthManager;
 import ru.messenger.authentication.LoginRequest;
 import ru.messenger.authentication.SignupRequest;
+import ru.messenger.model.SearchResult;
 import ru.messenger.service.UserService;
 import ru.messenger.entity.User;
 
@@ -38,7 +41,8 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<User> login(HttpServletRequest request,
                                       HttpServletResponse response,
-                                      @RequestBody(required = false) LoginRequest body) {
+                                      @RequestBody(required = false) LoginRequest body) throws InterruptedException {
+        Thread.sleep(1000); // TODO: remove
         User user;
 
         if (body != null) {
@@ -67,6 +71,20 @@ public class UserController {
         response.addCookie(cookie);
 
         return ResponseEntity.ok(createdUser);
+    }
+
+    @GetMapping("/contacts")
+    public ResponseEntity<SearchResult<User>> getContacts(HttpServletRequest request, @RequestParam(value = "offset") int offset) throws Exception {
+        Thread.sleep(1000); // TODO: remove
+
+        try {
+            User user = (User) request.getAttribute("user");
+            SearchResult<User> result = userService.findContacts(user.getId(), offset);
+
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     private Cookie createCookieWithToken(String username) {
