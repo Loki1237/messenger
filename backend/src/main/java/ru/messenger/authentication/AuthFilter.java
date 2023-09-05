@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import ru.messenger.entity.User;
+import ru.messenger.exception.AuthException;
 
 @Component
 public class AuthFilter extends GenericFilterBean {
@@ -44,7 +45,7 @@ public class AuthFilter extends GenericFilterBean {
 
             request.setAttribute("user", user);
             fc.doFilter(request, response);
-        } catch (Exception e) {
+        } catch (AuthException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }

@@ -9,6 +9,7 @@ import java.util.List;
 import ru.messenger.exception.SignupException;
 import ru.messenger.repository.UserRepository;
 import ru.messenger.model.SearchResult;
+import ru.messenger.model.ContactView;
 import ru.messenger.entity.User;
 
 @Service
@@ -25,11 +26,11 @@ public class UserService {
         return repository.findByUsername(username);
     }
 
-    public SearchResult<User> findContacts(long userId, int offset) {
-        List<User> contacts = repository.findContacts(userId, offset);
-        long count = repository.getContactCount(userId);
+    public SearchResult<ContactView> findContacts(User user, int offset) {
+        List<ContactView> contacts = repository.findContacts(user, offset);
+        long count = repository.getContactCount(user);
 
-        return SearchResult.<User>builder().list(contacts).total(count).build();
+        return SearchResult.<ContactView>builder().list(contacts).total(count).build();
     }
 
     public User create(User user) throws SignupException {

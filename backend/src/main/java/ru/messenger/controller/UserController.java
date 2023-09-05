@@ -21,6 +21,7 @@ import ru.messenger.authentication.AuthManager;
 import ru.messenger.authentication.LoginRequest;
 import ru.messenger.authentication.SignupRequest;
 import ru.messenger.model.SearchResult;
+import ru.messenger.model.ContactView;
 import ru.messenger.service.UserService;
 import ru.messenger.entity.User;
 
@@ -74,16 +75,14 @@ public class UserController {
     }
 
     @GetMapping("/contacts")
-    public ResponseEntity<SearchResult<User>> getContacts(HttpServletRequest request, @RequestParam(value = "offset") int offset) throws Exception {
-        Thread.sleep(1000); // TODO: remove
-
+    public ResponseEntity<SearchResult<ContactView>> getContacts(HttpServletRequest request, @RequestParam(value = "offset") int offset) {
         try {
             User user = (User) request.getAttribute("user");
-            SearchResult<User> result = userService.findContacts(user.getId(), offset);
+            SearchResult<ContactView> result = userService.findContacts(user, offset);
 
             return ResponseEntity.ok(result);
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
     }
 
@@ -96,12 +95,12 @@ public class UserController {
     }
 
     @ExceptionHandler(AuthException.class)
-    public ResponseEntity<String> handleAuthException(AuthException e) {
+    private ResponseEntity<String> handleAuthException(AuthException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
 
     @ExceptionHandler(SignupException.class)
-    public ResponseEntity<String> handleSignupException(SignupException e) {
+    private ResponseEntity<String> handleSignupException(SignupException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 

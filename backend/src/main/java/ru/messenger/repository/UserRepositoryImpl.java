@@ -3,11 +3,15 @@ package ru.messenger.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
+import ru.messenger.entity.QChat;
 import ru.messenger.entity.QUser;
 import ru.messenger.entity.User;
+import ru.messenger.model.ChatType;
+import ru.messenger.model.ContactView;
 import ru.messenger.utils.JpqlQueryFactory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -29,23 +33,43 @@ public class UserRepositoryImpl implements UserRepository {
             .fetchOne();
     }
 
-    public List<User> findContacts(long userId, int offset) {
-        User user = queryFactory.createQuery()
+    public List<ContactView> findContacts(User user, int offset) {
+        List<User> contacts = queryFactory.createQuery()
             .select(QUser.user)
             .from(QUser.user)
-            .where(QUser.user.id.eq(userId))
+            .where(QUser.user.eq(user))
             .innerJoin(QUser.user.contacts)
-            .offset(offset)
-            .limit(30)
-            .fetchOne();
+            .fetchJoin()
+            .fetchOne()
+            .getContacts();
 
-        return user.getContacts();
+        return contacts.stream().map(contact -> {
+            ContactView contactView = ContactView.builder().user(contact).build();
+
+            try {
+                long dialogId = queryFactory.createQuery()
+                    .select(QChat.chat.id)
+                    .from(QChat.chat)
+                    .where(
+                        QChat.chat.type.eq(ChatType.DIALOG)
+                            .and(QChat.chat.members.contains(user)
+                                .and(QChat.chat.members.contains(contact)))
+                    )
+                    .fetchOne();
+
+                contactView.setChatId(dialogId);
+            } catch (Exception e) {
+                contactView.setChatId(null);
+            }
+
+            return contactView;
+        }).collect(Collectors.toList());
     }
 
-    public long getContactCount(long userId) {
+    public long getContactCount(User user) {
         return queryFactory.createQuery()
             .from(QUser.user)
-            .where(QUser.user.id.eq(userId))
+            .where(QUser.user.eq(user))
             .innerJoin(QUser.user.contacts)
             .fetchCount();
     }

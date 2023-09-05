@@ -2,7 +2,6 @@ package ru.messenger.entity;
 
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
@@ -21,6 +20,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import ru.messenger.model.ChatType;
 @AllArgsConstructor
 @Entity
 @Table(name = "chat", schema = "public")
-public class Chat {
+public class Chat implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -66,5 +66,9 @@ public class Chat {
     @OneToMany(fetch = FetchType.LAZY, targetEntity = Message.class, orphanRemoval = true)
     @JoinColumn(name = "chat_id")
     private List<Message> messages = new ArrayList<>();
+
+    public boolean equals(Chat user) {
+        return user.id == this.id;
+    }
 
 }

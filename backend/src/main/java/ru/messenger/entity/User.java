@@ -17,6 +17,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "user", schema = "public")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -51,9 +52,16 @@ public class User {
     private String password;
 
     @Builder.Default
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinTable(name = "user_contact", inverseJoinColumns = @JoinColumn(name = "contact_id"))
     private List<User> contacts = new ArrayList<>();
+
+    public String getFullName() {
+        return firstname + " " + lastname;
+    }
+
+    public boolean equals(User user) {
+        return user.id == this.id;
+    }
 
 }

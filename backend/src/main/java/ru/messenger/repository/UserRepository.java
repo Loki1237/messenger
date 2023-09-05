@@ -2,15 +2,16 @@ package ru.messenger.repository;
 
 import java.util.List;
 import ru.messenger.entity.User;
+import ru.messenger.model.ContactView;
 
 public interface UserRepository {
     User findById(long id);
 
     User findByUsername(String username);
 
-    List<User> findContacts(long userId, int offset);
+    List<ContactView> findContacts(User user, int offset);
 
-    long getContactCount(long userId);
+    long getContactCount(User user);
 
     boolean exists(String username);
 
