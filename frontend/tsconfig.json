@@ -9,7 +9,7 @@
         "allowJs": false,
         "esModuleInterop": true,
         "lib": ["es6", "es7", "dom"],
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "noImplicitThis": true,
         "strictNullChecks": false,
         "typeRoots": [

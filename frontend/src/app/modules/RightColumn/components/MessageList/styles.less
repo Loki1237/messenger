@@ -1,0 +1,51 @@
+.MessageList {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+    padding: 30px 50px;
+    background: top left / 350px 350px url('assets/msg_list_bg.png'),
+                no-repeat linear-gradient(135deg, rgba(32, 108, 214, 0.6), rgba(87, 194, 166, 0.6));
+    background-blend-mode: multiply;
+}
+
+.Message {
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 1px 2px -1px rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.first_in_group {
+    border-radius: 0 5px 5px 5px;
+}
+
+.arrow {
+    position: absolute;
+    left: -4px;
+    top: 0;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(to right bottom, #fff 50%, transparent 50%);
+    transform: skew(45deg);
+}
+
+.own {
+    align-self: flex-end;
+
+    &.first_in_group {
+        border-radius: 5px 0 5px 5px;
+    }
+
+    & > .arrow {
+        left: auto;
+        right: -4px;
+        background: linear-gradient(to left bottom, #fff 50%, transparent 50%);
+        transform: skew(315deg);
+    }
+}
